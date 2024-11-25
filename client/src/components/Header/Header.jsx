@@ -24,7 +24,7 @@ const Header = () => {
                   <span className='md:text-xs text-[10px]'>Ana Sayfa</span>
               </a>
               <Badge count={1} offset={[0,6]} className='md:flex hidden'>
-              <a href={"/"} className='menu-link flex flex-col items-center hover:text-[#40a9ff] transition-all'>
+              <a href={"/cart"} className='menu-link flex flex-col items-center hover:text-[#40a9ff] transition-all'>
                  
                   <ShoppingCartOutlined className='md:text-2xl text-xl'/> 
                   <span className='md:text-xs text-[10px]'>Sepete Git</span>

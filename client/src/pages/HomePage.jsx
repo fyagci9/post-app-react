@@ -1,13 +1,13 @@
 import CartTotal from "../components/cart/CartTotal";
 import Categories from "../components/categories/Categories";
 import Header from "../components/header/Header";
-import Product from "../components/products/Product";
+import Product from "../components/product/Product";
 
 
 const HomePage = () => {
   return (
     <> 
-    <Header></Header>
+        <Header></Header>
     <div className="home px-6 flex md:flex-row flex-col justify-between gap-10 md:pb-0 pb-20">
 
       <div className="categories overflow-auto max-h-[calc(100vh_-_112px)] md:pb-10">
