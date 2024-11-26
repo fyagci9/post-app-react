@@ -1,6 +1,9 @@
 import {BrowserRouter , Route, Routes} from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
+import BillPage from "./pages/BillPage";
+import CustomerPage from "./pages/CustomerPage";
+import StatisticPage from "./pages/StatisticPage";
 
 function App() {
   return (
@@ -11,6 +14,9 @@ function App() {
 
       <Route path="/" element={<HomePage></HomePage>}> </Route>
       <Route path="/cart" element={<CartPage></CartPage>}> </Route>
+      <Route path="/bills" element={<BillPage></BillPage>}> </Route>
+      <Route path="/customers" element={<CustomerPage></CustomerPage>}> </Route>
+      <Route path="/statistic" element={<StatisticPage></StatisticPage>}> </Route>
 
     </Routes>
     
