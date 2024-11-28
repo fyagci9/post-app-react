@@ -44,7 +44,6 @@ const StatisticPage = () => {
         yField: 'close',
       };
 
-
   return (
    
     <>
@@ -59,7 +58,7 @@ const StatisticPage = () => {
 
           <div className="statistic-cards grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 my-10 gap-10">
 
-        <StatisticCart title={"Toplam Müşteri"} amount={"10"} img={"images/user.png"} ></StatisticCart>
+         <StatisticCart title={"Toplam Müşteri"} amount={"10"} img={"images/user.png"} ></StatisticCart>
          <StatisticCart  title={"Toplam Kazanç"} amount={"10"} img={"images/money.png"}></StatisticCart>
          <StatisticCart  title={"Toplam Satış"} amount={"10"} img={"images/sale.png"}></StatisticCart>
          <StatisticCart  title={"Toplam Ürün"} amount={"10"} img={"images/product.png"}></StatisticCart>
