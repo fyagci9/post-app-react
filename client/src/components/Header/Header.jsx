@@ -45,7 +45,7 @@ const Header = () => {
                   <BarChartOutlined className='md:text-2xl text-xl'/> 
                   <span className='md:text-xs text-[10px]'>İstatistikler</span>
               </Link>
-              <Link to={"/register"} className='menu-link flex flex-col items-center hover:text-[#40a9ff] transition-all'>
+              <Link to={"/login"} className='menu-link flex flex-col items-center hover:text-[#40a9ff] transition-all'>
                   <LogoutOutlined className='md:text-2xl text-xl'/> 
                   <span className='md:text-xs text-[10px]'> Çıkış Yap</span>
               </Link>
