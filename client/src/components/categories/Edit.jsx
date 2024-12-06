@@ -31,6 +31,31 @@ const [editingRow, setEditingRow] = useState({});
     }
 
 
+const deleteCategory = (id) =>{
+
+ if(window.confirm("Kategoriyi silmek istedğinize emin misiniz?")){
+   try {
+
+    fetch("http://localhost:5000/api/categories/delete-category" ,{
+      method: "DELETE",
+      body: JSON.stringify({categoryId : id}),
+      headers: {"Content-type": "application/json; charset=UTF-8" }
+    })
+    message.success("Kategori Başarıyla Silindi")
+   setCategories(categories.filter((item)=> item._id !== id))
+
+    
+  } catch (error) {
+
+    message.error("Bişeyler yanlış gitti!!")
+    console.log(error);
+    
+  }
+
+ }
+}
+
+
   const columns = [
     {
       title: "Kategori Adı",
@@ -54,9 +79,9 @@ const [editingRow, setEditingRow] = useState({});
       render: (text, record) => {
         return (
           <div>
-            <Button type="link" onClick={()=>setEditingRow(record)}>Düzenle</Button>
+            <Button type="link" onClick={()=>setEditingRow(record)} className="pl-0">Düzenle</Button>
             <Button type="text" htmlType="submit">Kaydet</Button>
-            <Button type="link" danger>Sil</Button>
+            <Button type="link" danger onClick={() =>deleteCategory(record._id)}>Sil</Button>
           </div>
         );
       },
