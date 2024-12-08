@@ -2,8 +2,14 @@ import React from 'react'
 import {Link} from 'react-router';
 import { Badge, Input } from 'antd';
 import { BarChartOutlined, CopyOutlined, HomeOutlined, LogoutOutlined, SearchOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+
+    const cart = useSelector((state)=> state.cart )
+
+        console.log(cart.cartItems.length);
+   
   return (
     <div className='border-b mb-6'>
         <header className='py-4 px-6 flex justify-between items-center gap-10'>
@@ -25,7 +31,7 @@ const Header = () => {
                   <HomeOutlined className='md:text-2xl text-xl'/> 
                   <span className='md:text-xs text-[10px]'>Ana Sayfa</span>
               </Link>
-              <Badge count={1} offset={[0,6]} className='md:flex hidden'>
+              <Badge count={cart.cartItems.length} offset={[0,6]} className='md:flex hidden'>
               <Link to={"/cart"} className='menu-link flex flex-col items-center hover:text-[#40a9ff] transition-all'>
                  
                   <ShoppingCartOutlined className='md:text-2xl text-xl'/> 

@@ -5,7 +5,10 @@ import {
   PlusCircleOutlined,
 } from "@ant-design/icons";
 
+import { useSelector } from "react-redux";
+
 const CartTotal = () => {
+  const {cartItems} = useSelector((state)=>state.cart)
   return (
     <div className="cart h-full max-h-[calc(100vh_-_90px)] flex flex-col">
       <h2
@@ -15,67 +18,47 @@ const CartTotal = () => {
         Sepetteki Ürünler
       </h2>
       <ul className="cart-items px-2 flex flex-col gap-y-3 py-2 overflow-y-auto">
-        <li className="cart-item flex justify-between">
-          <div className="flex items-center">
-            <img
-              src="https://cdn.yemek.com/mnresize/1250/833/uploads/2015/10/elma-zencefil-suyu-aralik-2020.jpg"
-              alt=""
-              className="w-16 h-16 object-cover"
-            />
 
-            <div className="flex flex-col ml-2">
-              <b>Elma</b>
-              <span>12₺ x 2 </span>
-            </div>
+      {cartItems.map((item)=>(
+        <li className="cart-item flex justify-between" key={item._id}>
+        <div className="flex items-center">
+          <img
+            src={item.img}
+            alt=""
+            className="w-16 h-16 object-cover"
+          />
+
+          <div className="flex flex-col ml-2">
+            <b>{item.title}</b>
+            <span>{item.price}₺ x {item.quantity} </span>
           </div>
+        </div>
 
-          <div className="flex items-center gap-x-1">
-            <Button
-              type="primary"
-              size="small"
-              className="w-full items-center justify-center !rounded-full"
-              icon={<PlusCircleOutlined />}
-            />
-            <span className="font-bold">1</span>
-            <Button
-              type="primary"
-              size="small"
-              className="w-full items-center justify-center !rounded-full"
-              icon={<MinusCircleOutlined />}
-            />
-          </div>
-        </li>
+        <div className="flex items-center gap-x-1">
+          <Button
+            type="primary"
+            size="small"
+            className="w-full items-center justify-center !rounded-full"
+            icon={<PlusCircleOutlined />}
+          />
+          <span className="font-bold">{item.quantity}</span>
+          <Button
+            type="primary"
+            size="small"
+            className="w-full items-center justify-center !rounded-full"
+            icon={<MinusCircleOutlined />}
+          />
+        </div>
+      </li>
 
-        <li className="cart-item flex justify-between">
-          <div className="flex items-center">
-            <img
-              src="https://cdn.yemek.com/mnresize/1250/833/uploads/2015/10/elma-zencefil-suyu-aralik-2020.jpg"
-              alt=""
-              className="w-16 h-16 object-cover"
-            />
+      )
 
-            <div className="flex flex-col ml-2">
-              <b>Elma</b>
-              <span>12₺ x 2 </span>
-            </div>
-          </div>
 
-          <div className="flex items-center gap-x-1">
-            <Button
-              type="primary"
-              size="small"
-              className="w-full items-center justify-center !rounded-full"
-              icon={<PlusCircleOutlined />}
-            />
-            <span className="font-bold">1</span>
-            <Button
-              type="primary"
-              size="small"
-              className="w-full items-center justify-center !rounded-full"
-              icon={<MinusCircleOutlined />}
-            />
-          </div>
-        </li>
+
+      )}
+
+        
+
       </ul>
 
       <div className="cart-totals mt-auto">

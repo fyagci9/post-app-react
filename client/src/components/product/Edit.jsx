@@ -3,11 +3,9 @@ import React, { useEffect, useState } from "react";
 const Edit = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [isEditModalOpen, setIsEditModalOpen] = useState([]);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState({});
   const [form] = Form.useForm();
-
-
 
   useEffect(() => {
     const getProducts = async () => {
@@ -22,26 +20,21 @@ const Edit = () => {
     getProducts();
   }, []);
 
-
-  useEffect(()=>{
-    const getCategories = async () =>{
-
-        try {
-            const res = await fetch("http://localhost:5000/api/products/get-all");
-            const data = await res.json();
-            data && setCategories(
-                data.map((item)=>{
-                    return {...item, value: item.title}
-
-                })
-            )
-        } catch (error) {
-            
-        }
-    } 
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/categories/get-all");
+        const data = await res.json();
+        data &&
+          setCategories(
+            data.map((item) => {
+              return { ...item, value: item.title };
+            })
+          );
+      } catch (error) {}
+    };
     getCategories();
-  }, [])
-
+  }, []);
 
   const onFinish = (values) => {
     console.log(values);
@@ -54,10 +47,10 @@ const Edit = () => {
       message.success("Kategori başarıyla güncellendi.");
       setProducts(
         products.map((item) => {
-            if(item._id === editingItem._id){
-                return values;
-            }
-         return item;
+          if (item._id === editingItem._id) {
+            return values;
+          }
+          return item;
         })
       );
     } catch (error) {
@@ -65,6 +58,7 @@ const Edit = () => {
       console.log(error);
     }
   };
+
   const deleteProduct = (id) => {
     if (window.confirm("Emin misiniz?")) {
       try {
@@ -81,6 +75,7 @@ const Edit = () => {
       }
     }
   };
+
   const columns = [
     {
       title: "Ürün Adı",
@@ -118,12 +113,17 @@ const Edit = () => {
       render: (_, record) => {
         return (
           <div>
-            <Button type="link" className="pl-0" onClick={()=>{setIsEditModalOpen(true); setEditingItem(record)}}>
+            <Button
+              type="link"
+              className="pl-0"
+              onClick={() => {
+                setIsEditModalOpen(true);
+                setEditingItem(record);
+              }}
+            >
               Düzenle
             </Button>
-            <Button type="link" htmlType="submit" className="text-gray-500">
-              Kaydet
-            </Button>
+
             <Button
               type="link"
               danger
@@ -137,9 +137,7 @@ const Edit = () => {
     },
   ];
   return (
-
     <>
-    <Form onFinish={onFinish}>
       <Table
         bordered
         dataSource={products}
@@ -150,7 +148,7 @@ const Edit = () => {
           y: 600,
         }}
       />
-    <Modal
+      <Modal
         title="Yeni Ürün Ekle"
         open={isEditModalOpen}
         onCancel={() => setIsEditModalOpen(false)}
@@ -218,12 +216,7 @@ const Edit = () => {
           </Form.Item>
         </Form>
       </Modal>
-
-        
-    </Form>
     </>
-
-    
   );
 };
 export default Edit;
