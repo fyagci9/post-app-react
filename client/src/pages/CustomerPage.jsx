@@ -1,53 +1,45 @@
 import { Table} from "antd"
 import Header from "../components/header/Header"
-import { useState } from "react";
-import PrintBill from "../components/bills/PrintBill";
-
-const BillPage = () => {
+import { useEffect, useState } from "react";
 
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+const CustomerPage = () => {
 
-    const dataSource = [
-        {
-          key: '1',
-          name: 'Mike',
-          age: 32,
-          address: '10 Downing Street',
-        },
-        {
-          key: '2',
-          name: 'John',
-          age: 42,
-          address: '10 Downing Street',
-        },
-      ];
+
+  const [billItems, setBillItems] = useState([]);
+
+  useEffect(()=>{
+
+    const getBills = async ()=>{
+      try {
+        
+        const res = await fetch("http://localhost:5000/api/bills/get-all");
+        const data = await res.json();
+        setBillItems(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getBills();
+
+  },[])
+
+    
 
       const columns = [
         {
-          title: "Key",
-          dataIndex: "key",
-          key:"key",
-
+          title: "Müşteri Adı",
+          dataIndex: "customerName",
+          key: "customerName",
         },
         {
-          title: 'Name',
-          dataIndex: 'name',
-          key: 'name',
-        },
-        {
-          title: 'Age',
-          dataIndex: 'age',
-          key: 'age',
-        },
-        {
-          title: 'Address',
-          dataIndex: 'address',
-          key: 'address',
+          title: "Telefon Numarası",
+          dataIndex: "customerPhoneNumber",
+          key: "customerPhoneNumber",
         },
       ];
       
- console.log(isModalOpen);
+
 
   return (
    
@@ -57,20 +49,19 @@ const BillPage = () => {
         <h1 className="text-4xl font-bold text-center mb-4">Müşteriler</h1>
 
         <div className="px-6">
-            <Table dataSource={dataSource} columns={columns} bordered pagination={false}></Table>
+            <Table dataSource={billItems} columns={columns} bordered pagination={false} scroll={{
+            x: 1000,
+            y: 300
+          }}></Table>
 
-            <div className="cart-total flex justify-end mt-4">
-              
-            
-                
-            </div>
+          
         </div>
 
-        <PrintBill isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}></PrintBill>
+       
 
     </>
   
 )
 }
 
-export default BillPage
+export default CustomerPage

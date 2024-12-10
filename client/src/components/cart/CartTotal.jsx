@@ -73,7 +73,7 @@ const CartTotal = () => {
                   />
                 </div>
               </li>
-            ))
+            )).reverse()
           : "Sepette hiç ürün yok..."}
       </ul>
 

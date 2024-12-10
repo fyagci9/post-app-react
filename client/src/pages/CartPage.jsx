@@ -112,7 +112,7 @@ const CartPage = () => {
     ];
   
       
- console.log(isModalOpen);
+
 
   return (
    

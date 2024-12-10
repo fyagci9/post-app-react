@@ -1,8 +1,41 @@
+import { useEffect, useState } from "react";
 import Header from "../components/header/Header"
 import StatisticCart from "../components/statistics/StatisticCart"
 
 const StatisticPage = () => {
+  const [data, setData] = useState([]);
+  const [products, setProducts] = useState([]);
 
+  const totalAmount = () => {
+    const amount = data.reduce((total, item) => item.totalAmount + total, 0);
+    return `${amount.toFixed(2)}₺`;
+  };
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/products/get-all");
+        const data = await res.json();
+        setProducts(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProducts();
+  }, []);
+
+  useEffect(() => {
+    asyncFetch();
+  }, []);
+
+  const asyncFetch = () => {
+    fetch("http://localhost:5000/api/bills/get-all")
+      .then((response) => response.json())
+      .then((json) => setData(json))
+      .catch((error) => {
+        console.log("fetch data failed", error);
+      });
+  };
   return (
    
     <>
@@ -17,22 +50,13 @@ const StatisticPage = () => {
 
           <div className="statistic-cards grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 my-10 gap-10">
 
-         <StatisticCart title={"Toplam Müşteri"} amount={"10"} img={"images/user.png"} ></StatisticCart>
-         <StatisticCart  title={"Toplam Kazanç"} amount={"10"} img={"images/money.png"}></StatisticCart>
-         <StatisticCart  title={"Toplam Satış"} amount={"10"} img={"images/sale.png"}></StatisticCart>
-         <StatisticCart  title={"Toplam Ürün"} amount={"10"} img={"images/product.png"}></StatisticCart>
+         <StatisticCart title={"Toplam Müşteri"} amount={data?.length} img={"images/user.png"} ></StatisticCart>
+         <StatisticCart  title={"Toplam Kazanç"} amount={totalAmount()} img={"images/money.png"}></StatisticCart>
+         <StatisticCart  title={"Toplam Satış"} amount={data?.length} img={"images/sale.png"}></StatisticCart>
+         <StatisticCart  title={"Toplam Ürün"} amount={products?.length} img={"images/product.png"}></StatisticCart>
 
           </div>
 
-          <div className="flex justify-between gap-10 lg:flex-row flex-col items-center">
-            
-            <div className="lg:w-1/2 lg:h-full h-72 ">
-               
-            </div>
-            <div className="lg:w-1/2 lg:h-full h-72 ">
-              
-            </div>
-        </div>
         
         </div>
 

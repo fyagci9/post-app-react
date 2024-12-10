@@ -37,7 +37,7 @@ const Edit = () => {
   }, []);
 
   const onFinish = (values) => {
-    console.log(values);
+   
     try {
       fetch("http://localhost:5000/api/products/update-product", {
         method: "PUT",

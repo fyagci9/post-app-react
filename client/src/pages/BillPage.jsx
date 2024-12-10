@@ -7,7 +7,8 @@ const BillPage = () => {
 
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [billItems, setBillItems] = useState();
+    const [billItems, setBillItems] = useState([]);
+    const [customer, setCustomer] = useState();
 
     useEffect(()=>{
       const getBills = async()=>{
@@ -26,7 +27,6 @@ const BillPage = () => {
     }, [])
 
     
-
     const columns = [
       {
         title: "Müşteri Adı",
@@ -56,14 +56,19 @@ const BillPage = () => {
         title: "Actions",
         dataIndex: "action",
         key: "action",
-        render: (text)=>{
-          return <Button type="link" className="pl-0" onClick={()=> setIsModalOpen(true)}>Yazdır</Button>
+        render: (_, record)=>{
+          return <Button type="link" className="pl-0" 
+          onClick={()=>
+            { setIsModalOpen(true)
+          setCustomer(record)
+            }
+          }>Yazdır</Button>
         }
       },
     ];
   
       
- console.log(isModalOpen);
+
 
   return (
    
@@ -73,7 +78,7 @@ const BillPage = () => {
         <h1 className="text-4xl font-bold text-center mb-4">Faturalar</h1>
 
         <div className="px-6">
-            <Table dataSource={billItems} columns={columns} bordered pagination={false}></Table>
+            <Table dataSource={billItems} columns={columns} bordered pagination={false} scroll={{x:1000, y:300}}></Table>
 
             <div className="cart-total flex justify-end mt-4">
               
@@ -86,7 +91,7 @@ const BillPage = () => {
             </div>
         </div>
 
-        <PrintBill isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}></PrintBill>
+        <PrintBill isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} customer={customer}></PrintBill>
 
     </>
   

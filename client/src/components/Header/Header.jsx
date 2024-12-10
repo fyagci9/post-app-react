@@ -9,7 +9,7 @@ const Header = () => {
 
     const cart = useSelector((state)=> state.cart )
 
-        console.log(cart.cartItems.length);
+      
    
   return (
     <div className='border-b mb-6'>
