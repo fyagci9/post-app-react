@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 
 //! register process
 
-router.post("/add-user", async (req, res) => {
+router.post("/register", async (req, res) => {
   try {
     const { username, email, password } = req.body;
     const salt = await bcrypt.genSalt(10);
@@ -28,7 +28,12 @@ router.post("/add-user", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const user = await Auth.findOne({ email: req.body.email });
-    !user && res.status(400).send({ error: "User not found" });
+    
+    if(!user){
+      return res.status(400).send({ error: "User not found" });
+    }
+   
+
 
     const validPassword = await bcrypt.compare(
       req.body.password,

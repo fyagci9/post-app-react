@@ -1,7 +1,7 @@
 const User = require("../models/User.js");
 const router = require("express").Router();
 
-// Tüm kategorileri listeleme işlemi
+// Tüm kullanıcıları listeleme işlemi
 
 router.get("/get-all", async (req, res) => {
   try {
@@ -12,7 +12,7 @@ router.get("/get-all", async (req, res) => {
   }
 });
 
-// Yeni kategori ekleme işlemi
+// Yeni kullanıcı ekleme işlemi
 
 router.get("/", async (req, res) => {
   const userId = req.body.userId;

@@ -1,4 +1,4 @@
-import {BrowserRouter , Route, Routes} from "react-router-dom";
+import {BrowserRouter , Navigate, Route, Routes} from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
 import BillPage from "./pages/BillPage";
@@ -15,12 +15,12 @@ function App() {
     
     <Routes>
 
-      <Route path="/" element={<HomePage></HomePage>}> </Route>
-      <Route path="/cart" element={<CartPage></CartPage>}> </Route>
-      <Route path="/bills" element={<BillPage></BillPage>}> </Route>
-      <Route path="/customers" element={<CustomerPage></CustomerPage>}> </Route>
-      <Route path="/statistic" element={<StatisticPage></StatisticPage>}> </Route>
-      <Route path="/products" element={<ProductPage></ProductPage>}> </Route>
+      <Route path="/" element={<RouteControl><HomePage></HomePage></RouteControl>}> </Route>
+      <Route path="/cart" element={<RouteControl> <CartPage></CartPage></RouteControl>}> </Route>
+      <Route path="/bills" element={<RouteControl> <BillPage></BillPage></RouteControl>}> </Route>
+      <Route path="/customers" element={<RouteControl> <CustomerPage></CustomerPage></RouteControl>}> </Route>
+      <Route path="/statistic" element={<RouteControl> <StatisticPage></StatisticPage></RouteControl>}> </Route>
+      <Route path="/products" element={<RouteControl> <ProductPage></ProductPage></RouteControl>}> </Route>
       <Route path="/register" element={<Register></Register>}> </Route>
       <Route path="/login" element={<Login></Login>}> </Route>
 
@@ -32,3 +32,12 @@ function App() {
 }
 
 export default App;
+
+export const RouteControl =({children})=>{
+  if(localStorage.getItem("posUser")){
+    return children
+  }else{
+    return <Navigate to="/login"></Navigate>
+  }
+
+}

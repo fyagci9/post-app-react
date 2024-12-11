@@ -2,7 +2,7 @@ const Bill = require("../models/Bill.js");
 const router = require("express").Router();
 
 
-// Tüm kategorileri listeleme işlemi
+// Tüm Fatura listeleme işlemi
 
 router.get("/get-all", async (req, res) => {
   try {
@@ -13,7 +13,7 @@ router.get("/get-all", async (req, res) => {
   }
 });
 
-// Yeni kategori ekleme işlemi
+// Yeni Fatura ekleme işlemi
 
 router.post("/add-bill", async (req, res) => {
   try {
@@ -25,7 +25,7 @@ router.post("/add-bill", async (req, res) => {
   }
 });
 
-// Kategori Güncelleme İşlemi
+// Fatura Güncelleme İşlemi
 
 router.put("/update-bill", async (req, res) => {
   try {
@@ -36,7 +36,7 @@ router.put("/update-bill", async (req, res) => {
   }
 });
 
-// Kategori Silme İşlemi
+// Fatura Silme İşlemi
 
 router.delete("/delete-bill", async (req, res) => {
   try {

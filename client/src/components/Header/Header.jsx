@@ -1,6 +1,6 @@
 import React from 'react'
-import {Link} from 'react-router';
-import { Badge, Input } from 'antd';
+import {Link, useNavigate} from 'react-router';
+import { Badge, Input, message } from 'antd';
 import { BarChartOutlined, CopyOutlined, HomeOutlined, LogoutOutlined, SearchOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import "./index.css"
@@ -8,6 +8,16 @@ import "./index.css"
 const Header = () => {
 
     const cart = useSelector((state)=> state.cart )
+
+    const navigate = useNavigate();
+    const logOut =()=>{
+        if(window.confirm("Çıkmak istediğine emin misin?")){
+            localStorage.removeItem("posUser");
+            navigate("/login")
+            message.success("Çıkış işlemi başarılı")
+
+        }
+    }
 
       
    
@@ -51,10 +61,13 @@ const Header = () => {
                   <BarChartOutlined className='md:text-2xl text-xl'/> 
                   <span className='md:text-xs text-[10px]'>İstatistikler</span>
               </Link>
-              <Link to={"/login"} className='menu-link'>
+              <div onClick={logOut}>
+              <Link className='menu-link'>
                   <LogoutOutlined className='md:text-2xl text-xl'/> 
                   <span className='md:text-xs text-[10px]'> Çıkış Yap</span>
               </Link>
+              </div>
+             
             </div>
             <Badge count={cart.cartItems.length} offset={[0,0]} className='md:hidden flex'>
               <Link to={"/"} className='menu-link'>

@@ -4,6 +4,7 @@ const dotenv = require("dotenv")
 const cors = require("cors")
 const app = express();
 const port = 5000;
+const logger =require("morgan")
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ const connect = async () => {
 
 //middlewares
 
+app.use(logger("dev"))
 app.use(express.json())
 app.use(cors())
 

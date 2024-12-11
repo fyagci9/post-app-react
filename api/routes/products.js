@@ -2,7 +2,7 @@ const Product = require("../models/Product.js");
 const express = require("express");
 const router = express.Router();
 
-// Tüm kategorileri listeleme işlemi
+// Tüm ürün listeleme işlemi
 
 router.get("/get-all", async (req, res) => {
   try {
@@ -13,7 +13,7 @@ router.get("/get-all", async (req, res) => {
   }
 });
 
-// Yeni kategori ekleme işlemi
+// Yeni ürün ekleme işlemi
 
 router.post("/add-product", async (req, res) => {
   try {
@@ -25,7 +25,7 @@ router.post("/add-product", async (req, res) => {
   }
 });
 
-// Kategori Güncelleme İşlemi
+// ürün Güncelleme İşlemi
 
 router.put("/update-product", async (req, res) => {
   try {
@@ -36,7 +36,7 @@ router.put("/update-product", async (req, res) => {
   }
 });
 
-// Kategori Silme İşlemi
+// ürün Silme İşlemi
 
 router.delete("/delete-product", async (req, res) => {
   try {
