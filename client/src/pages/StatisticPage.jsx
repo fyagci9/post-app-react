@@ -5,6 +5,7 @@ import StatisticCart from "../components/statistics/StatisticCart"
 const StatisticPage = () => {
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
+  const user = JSON.parse(localStorage.getItem("posUser"))
 
   const totalAmount = () => {
     const amount = data.reduce((total, item) => item.totalAmount + total, 0);
@@ -45,7 +46,7 @@ const StatisticPage = () => {
         <div className="statistic-section">
           <h2 className="text-lg">
             Hoş geldin{" "}
-            <span className="text-green-700 font-bold text-xl">admin</span>.
+            <span className="text-green-700 font-bold text-xl">{user.username}</span>.
           </h2>
 
           <div className="statistic-cards grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 my-10 gap-10">

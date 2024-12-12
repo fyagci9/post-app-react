@@ -1,13 +1,14 @@
 import React from 'react'
-import {Link, useNavigate} from 'react-router';
+import {Link, useLocation, useNavigate} from 'react-router';
 import { Badge, Input, message } from 'antd';
 import { BarChartOutlined, CopyOutlined, HomeOutlined, LogoutOutlined, SearchOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import "./index.css"
 
-const Header = () => {
+const Header = ({setSearch}) => {
 
     const cart = useSelector((state)=> state.cart )
+    const {pathname} =useLocation();
 
     const navigate = useNavigate();
     const logOut =()=>{
@@ -30,39 +31,41 @@ const Header = () => {
                 </Link>
             </div>
 
-            <div className='header-search flex-1 flex justify-center '>
+            <div className='header-search flex-1 flex justify-center ' onClick={()=>{
+                pathname !== "/" && navigate("/")
+            }}>
                 <Input size="large" placeholder="Ne Arıyorsunuz..." prefix={<SearchOutlined />} 
-            className='rounded-full max-w-[800px]' /></div>
+            className='rounded-full max-w-[800px]' onChange={(e)=> setSearch(e.target.value.toLowerCase())} /></div>
 
 
             <div className='menu-links'>
 
-              <Link to={"/"} className='menu-link'>
+              <Link to={"/"} className={`menu-link ${pathname === "/" && "active" }`}>
                   <HomeOutlined className='md:text-2xl text-xl'/> 
                   <span className='md:text-xs text-[10px]'>Ana Sayfa</span>
               </Link>
               <Badge count={cart.cartItems.length} offset={[0,0]} className='md:flex hidden'>
-              <Link to={"/cart"} className='menu-link'>
+              <Link to={"/cart"} className={`menu-link ${pathname === "/cart" && "active" } `}>
                  
                   <ShoppingCartOutlined className='md:text-2xl text-xl'/> 
                   <span className='md:text-xs text-[10px]'>Sepete Git</span>
                  
               </Link>
               </Badge>
-              <Link to={"/bills"} className='menu-link'>
+              <Link to={"/bills"} className={`menu-link ${pathname === "/bills" && "active" }`}>
                   <CopyOutlined className='md:text-2xl text-xl'/> 
                   <span className='md:text-xs text-[10px]'>Faturalar</span>
               </Link>
-              <Link to={"/customers"} className='menu-link'>
+              <Link to={"/customers"} className={`menu-link ${pathname === "/customers" && "active" }`}>
                   <UserOutlined className='md:text-2xl text-xl'/> 
                   <span className='md:text-xs text-[10px]'>Müşteriler</span>
               </Link>
-              <Link to={"/statistic"} className='menu-link'>
+              <Link to={"/statistic"} className={`menu-link ${pathname === "/statistic" && "active" }`}>
                   <BarChartOutlined className='md:text-2xl text-xl'/> 
                   <span className='md:text-xs text-[10px]'>İstatistikler</span>
               </Link>
               <div onClick={logOut}>
-              <Link className='menu-link'>
+              <Link className={`menu-link `}>
                   <LogoutOutlined className='md:text-2xl text-xl'/> 
                   <span className='md:text-xs text-[10px]'> Çıkış Yap</span>
               </Link>
@@ -70,7 +73,7 @@ const Header = () => {
              
             </div>
             <Badge count={cart.cartItems.length} offset={[0,0]} className='md:hidden flex'>
-              <Link to={"/"} className='menu-link'>
+              <Link to={"/"} className={`menu-link ${pathname === "/" && "active" }`}>
                  
                   <ShoppingCartOutlined className='text-2xl'/> 
                   <span className='md:text-xs text-[10px]'>Sepete Git</span>
