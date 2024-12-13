@@ -19,8 +19,6 @@ const Header = ({setSearch}) => {
 
         }
     }
-
-      
    
   return (
     <div className='border-b mb-6'>
